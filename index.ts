@@ -3,8 +3,7 @@ import base64url from 'npm:base64url'
 import { message } from 'npm:@permaweb/aoconnect'
 
 import { Buffer } from 'node:buffer';
-import DenoCryptoDriver from './deno-crypto-driver.ts'
-import type { JWKInterface } from './deno-crypto-driver.ts'
+import DenoCryptoDriver, { JWKInterface } from './deno-crypto-driver.ts'
 
 import Signer from "./signer.ts";
 
