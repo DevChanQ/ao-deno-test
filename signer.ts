@@ -1,11 +1,5 @@
-type DataItem = any;
-
 import { Buffer } from 'node:buffer';
-
-export interface Tag {
-  name: string;
-  value: string;
-}
+import { Tag, DataItem } from 'npm:warp-arbundles'
 
 export default abstract class Signer {
   readonly signer?: any;

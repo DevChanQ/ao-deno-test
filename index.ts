@@ -6,28 +6,26 @@ import base64url from 'npm:base64url'
 import { message } from 'npm:@permaweb/aoconnect'
 
 import { Buffer } from 'node:buffer';
-import WebCryptoDriver from './webcrypto-driver.ts'
-import type { JWKInterface } from './webcrypto-driver.ts'
+import DenoCryptoDriver from './deno-crypto-driver.ts'
+import type { JWKInterface } from './deno-crypto-driver.ts'
 
 import Signer from "./signer.ts";
 
 const process = "18o_3lcvLH2SoYD3phOOJS3yDNfjU_R4e-zuJcK7m3E" 
 const wallet : JWKInterface = JSON.parse(Deno.env.get("WALLET_JWK") || "")
 
-const webCryptoDriver = new WebCryptoDriver()
-
 export default class ArweaveSigner implements Signer {
-  webCryptoDriver: WebCryptoDriver;
   readonly signatureType: number = 1;
   readonly ownerLength: number = 512;
   readonly signatureLength: number = 512;
   protected jwk: JWKInterface;
   public pk: string;
+  webCryptoDriver: DenoCryptoDriver;
 
   constructor(jwk: JWKInterface) {
     this.pk = jwk.n;
     this.jwk = jwk;
-    this.webCryptoDriver = new WebCryptoDriver()
+    this.webCryptoDriver = new DenoCryptoDriver()
   }
 
   get publicKey(): Buffer {
@@ -35,11 +33,11 @@ export default class ArweaveSigner implements Signer {
   }
 
   sign(message: Uint8Array): Uint8Array {
-    return webCryptoDriver.sign(this.jwk, message) as any;
+    return this.webCryptoDriver.sign(this.jwk, message) as any;
   }
 
   static async verify(pk: string, message: Uint8Array, signature: Uint8Array): Promise<boolean> {
-    return await webCryptoDriver.verify(pk, message, signature);
+    return await this.webCryptoDriver.verify(pk, message, signature);
   }
 }
 
