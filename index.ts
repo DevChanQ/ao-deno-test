@@ -11,7 +11,7 @@ import type { JWKInterface } from './deno-crypto-driver.ts'
 
 import Signer from "./signer.ts";
 
-const process = "18o_3lcvLH2SoYD3phOOJS3yDNfjU_R4e-zuJcK7m3E" 
+const process = "HH88jdkVaImwkc5jCfXHHOLK3erDlMc4K-eRHZXLmTo" 
 const wallet : JWKInterface = JSON.parse(Deno.env.get("WALLET_JWK") || "")
 
 export default class ArweaveSigner implements Signer {
