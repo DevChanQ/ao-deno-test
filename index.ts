@@ -1,25 +1,10 @@
-import { createData } from 'npm:warp-arbundles'
 import { message } from 'npm:@permaweb/aoconnect'
 
-import { JWKInterface } from './jwk-interface.ts'
-import ArweaveSigner from "./signer.ts";
+import { JWKInterface } from './deno-signer/jwk-interface.ts'
+import createDataItemSigner from './deno-signer/index.ts'
 
 const process = "HH88jdkVaImwkc5jCfXHHOLK3erDlMc4K-eRHZXLmTo" 
 const wallet : JWKInterface = JSON.parse(Deno.env.get("WALLET_JWK") || "")
-
-const createCustomDataItemSigner = (wallet: JWKInterface) => {
-  const signer = ({ data, tags, target, anchor } : any) => {
-    const signer = new ArweaveSigner(wallet)
-    const dataItem = createData(data, signer, { tags, target, anchor })
-    return dataItem.sign(signer)
-      .then(async () => ({
-        id: await dataItem.id,
-        raw: await dataItem.getRaw()
-      }))
-  }
-
-  return signer;
-}
 
 Deno.serve(async () => {
   // import data to ao via aoconnect
@@ -29,7 +14,7 @@ Deno.serve(async () => {
       { name: "Action", value: "Testing" }
     ],
     data: "",
-    signer: createCustomDataItemSigner(wallet),
+    signer: createDataItemSigner(wallet),
   })
 
   return new Response(
