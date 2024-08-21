@@ -1,6 +1,3 @@
-// Setup type definitions for built-in Supabase Runtime APIs
-import "jsr:@supabase/functions-js/edge-runtime.d.ts"
-
 import { createData } from 'npm:warp-arbundles'
 import base64url from 'npm:base64url'
 import { message } from 'npm:@permaweb/aoconnect'
