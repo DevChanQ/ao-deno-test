@@ -1,21 +1,9 @@
 import { crypto } from "https://deno.land/std@0.224.0/crypto/mod.ts";
 
+import { Buffer } from 'node:buffer';
+import { JWKInterface, JWKPublicInterface } from "./jwk-interface.ts";
+
 import * as ArweaveUtils from "./utils.ts";
-
-export interface JWKPublicInterface {
-  kty: string;
-  e: string;
-  n: string;
-}
-
-export interface JWKInterface extends JWKPublicInterface {
-  d?: string;
-  p?: string;
-  q?: string;
-  dp?: string;
-  dq?: string;
-  qi?: string;
-}
 
 interface SignatureOptions {
   saltLength?: number;
