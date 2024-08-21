@@ -57,7 +57,7 @@ const createCustomDataItemSigner = (wallet: JWKInterface) => {
 
 Deno.serve(async () => {
   // import data to ao via aoconnect
-  await message({
+  const message_id = await message({
     process,
     tags: [
       { name: "Action", value: "Testing" }
@@ -67,7 +67,7 @@ Deno.serve(async () => {
   })
 
   return new Response(
-    "Success",
+    `Message ID: ${message_id}`,
     { headers: { "Content-Type": "application/json" } },
   )
 })
