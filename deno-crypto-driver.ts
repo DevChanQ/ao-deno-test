@@ -1,4 +1,4 @@
-import { crypto } from "https://deno.land/std@0.115.0/crypto/mod.ts";
+import { crypto } from "https://deno.land/std@0.224.0/crypto/mod.ts";
 
 import * as ArweaveUtils from "./utils.ts";
 
